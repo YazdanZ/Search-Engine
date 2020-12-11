@@ -182,6 +182,11 @@ public class MiniTester{
 
    ArrayList<String> vertices = searchEngine.internet.getVertices();
 
+   if (vertices.size() != 4) {
+       result = false;
+       comment = comment + "4 vertices expected, found " + vertices.size() + " vertices instead \n";
+   }
+
    // set initial values for the ranks
    for (String v : vertices)
     searchEngine.internet.setPageRank(v, 1.0);
