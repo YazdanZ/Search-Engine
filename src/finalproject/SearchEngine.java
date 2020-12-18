@@ -19,10 +19,39 @@ public class SearchEngine {
      * For each new page seen, it updates the wordIndex, the web graph,
      * and the set of visited vertices.
      *
-     * 	This method will fit in about 30-50 lines (or less)
      */
     public void crawlAndIndex ( String url ) throws Exception {
-        // TODO : Add code here
+
+        // add a vertex for the current url
+        this.internet.addVertex ( url );
+        this.internet.setVisited ( url, true );
+
+        // update the wordIndex
+        ArrayList<String> words = this.parser.getContent ( url );
+        for (String word : words) {
+            // we will consider our searches to be case insensitive
+            word = word.toLowerCase ();
+
+            if (this.wordIndex.containsKey ( word )) {
+                if (!this.wordIndex.get ( word ).contains ( url ))
+                    this.wordIndex.get ( word ).add ( url );
+            } else {
+                ArrayList<String> values = new ArrayList<> ();
+                values.add ( url );
+                this.wordIndex.put ( word, values );
+            }
+        }
+
+        ArrayList<String> outLinks = this.parser.getLinks ( url );
+        for (String outlink : outLinks) {
+            this.internet.addVertex ( outlink );
+            this.internet.addEdge ( url, outlink );
+
+            if (!this.internet.getVisited ( outlink )) {
+                crawlAndIndex ( outlink );
+            }
+        }
+
     }
 
 
