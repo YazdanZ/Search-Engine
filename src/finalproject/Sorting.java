@@ -41,7 +41,7 @@ public class Sorting {
 	 * of pairs in the map. 
 	 */
     public static <K, V extends Comparable> ArrayList<K> fastSort(HashMap<K, V> results) {
-    	// ADD YOUR CODE HERE
+
     	return null;
     }
     
