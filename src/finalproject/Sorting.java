@@ -44,7 +44,7 @@ public class Sorting {
         K[] urls = (K[]) results.keySet ().toArray ();
 
         mergeSort ( results, urls, 0, urls.length - 1 );
-        for (int i = urls.length - 1 ; i >= 0; i--){
+        for (int i = urls.length - 1; i >= 0; i--) {
             sortedUrls.add ( urls[i] );
         }
         return sortedUrls;
