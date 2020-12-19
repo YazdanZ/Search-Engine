@@ -77,7 +77,6 @@ public class SearchEngine {
                     allConverge = false;
                 }
                 this.internet.setPageRank ( vertices.get ( i ), computedRanks.get ( i ) );
-                
             }
             converge = allConverge;
         }
@@ -107,12 +106,22 @@ public class SearchEngine {
 
     /* Returns a list of urls containing the query, ordered by rank
      * Returns an empty list if no web site contains the query.
-     *
-     * This method should take about 25 lines of code.
      */
     public ArrayList<String> getResults ( String query ) {
-        // TODO: Add code here
+        ArrayList<String> results = new ArrayList<> ();
 
-        return null;
+        // return an empty list if no website contains the query
+        if (!this.wordIndex.containsKey ( query ))
+            return results;
+
+        // get urls containing the word
+        ArrayList<String> urls = this.wordIndex.get ( query );
+        HashMap<String, Double>  unsortedResults = new HashMap<> ();
+
+        for (String url : urls)
+            unsortedResults.put ( url, this.internet.getPageRank ( url ) );
+
+        results = Sorting.fastSort ( unsortedResults );
+        return results;
     }
 }
