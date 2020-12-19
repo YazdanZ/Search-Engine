@@ -47,11 +47,9 @@ public class SearchEngine {
             this.internet.addVertex ( outlink );
             this.internet.addEdge ( url, outlink );
 
-            if (!this.internet.getVisited ( outlink )) {
+            if (!this.internet.getVisited ( outlink ))
                 crawlAndIndex ( outlink );
-            }
         }
-
     }
 
 
@@ -59,10 +57,6 @@ public class SearchEngine {
      * This computes the pageRanks for every vertex in the web graph.
      * It will only be called after the graph has been constructed using
      * crawlAndIndex().
-     * To implement this method, refer to the algorithm described in the
-     * assignment pdf.
-     *
-     * This method will probably fit in about 30 lines.
      */
     public void assignPageRanks ( double epsilon ) {
         // TODO : Add code here
@@ -75,8 +69,18 @@ public class SearchEngine {
      * their position in the list.
      */
     public ArrayList<Double> computeRanks ( ArrayList<String> vertices ) {
-        // TODO : Add code here
-        return null;
+        double dampingFactor = 0.5;
+        ArrayList<Double> computedRanks = new ArrayList<> ();
+        for (String vertice : vertices) {
+            double coef = 0;
+            ArrayList<String> inVertices = this.internet.getEdgesInto ( vertice );
+            for (String inVertice : inVertices) {
+                coef += this.internet.getPageRank ( inVertice ) / this.internet.getOutDegree ( inVertice );
+            }
+            double rank = (1 - dampingFactor) + dampingFactor * coef;
+            computedRanks.add ( rank );
+        }
+        return computedRanks;
     }
 
 
