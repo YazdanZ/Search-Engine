@@ -59,7 +59,28 @@ public class SearchEngine {
      * crawlAndIndex().
      */
     public void assignPageRanks ( double epsilon ) {
-        // TODO : Add code here
+        // start by initializing page ranks to 1 for all urls
+        ArrayList<String> vertices = this.internet.getVertices ();
+        for (String vertice : vertices) {
+            this.internet.setPageRank ( vertice, 1 );
+        }
+
+        // repeat until convergence
+        boolean converge = false;
+        while (!converge) {
+            ArrayList<Double> computedRanks = computeRanks ( vertices );
+
+            boolean allConverge = true;
+            for (int i = 0; i < computedRanks.size (); i++) {
+                double diff = this.internet.getPageRank ( vertices.get ( i ) ) - computedRanks.get ( i );
+                if (!(Math.abs ( diff ) < epsilon)) {
+                    allConverge = false;
+                }
+                this.internet.setPageRank ( vertices.get ( i ), computedRanks.get ( i ) );
+                
+            }
+            converge = allConverge;
+        }
     }
 
     /*
