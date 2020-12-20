@@ -108,6 +108,7 @@ public class SearchEngine {
      * Returns an empty list if no web site contains the query.
      */
     public ArrayList<String> getResults ( String query ) {
+        query = query.toLowerCase ();
         ArrayList<String> results = new ArrayList<> ();
 
         // return an empty list if no website contains the query
