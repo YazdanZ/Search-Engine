@@ -5,12 +5,12 @@ import java.util.HashMap;
 
 public class SearchEngine {
     public HashMap<String, ArrayList<String>> wordIndex;   // this will contain a set of pairs (String, LinkedList of Strings)
-    public MyWebGraph internet;
+    public WebGraph internet;
     public XmlParser parser;
 
     public SearchEngine ( String filename ) throws Exception {
         this.wordIndex = new HashMap<String, ArrayList<String>> ();
-        this.internet = new MyWebGraph ();
+        this.internet = new WebGraph ();
         this.parser = new XmlParser ( filename );
     }
 

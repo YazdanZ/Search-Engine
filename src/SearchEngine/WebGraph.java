@@ -3,10 +3,10 @@ package SearchEngine;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyWebGraph {
+public class WebGraph {
     HashMap<String, WebVertex> vertexList;
 
-    public MyWebGraph () {
+    public WebGraph () {
         vertexList = new HashMap<String, WebVertex> ();
     }
 
