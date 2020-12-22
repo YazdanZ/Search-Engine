@@ -1,4 +1,4 @@
-package finalproject;
+package SearchEngine;
 
 import javax.swing.*;
 import java.awt.*;
